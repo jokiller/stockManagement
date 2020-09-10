@@ -98,7 +98,7 @@ app.put('/modifProduct', (req, res) => {
     if (req.body.reference) newProduct.reference = req.body.reference
     if (req.body.type) newProduct.type = req.body.type
     if (req.body.categorie) newProduct.categorie = req.body.categorie
-
+    // finding product using id
     Produit.findById(req.body.id).then((produit) => {
         Produit.update(produit, newProduct).then(() => {
             res.send(newProduct)
