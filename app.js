@@ -117,7 +117,7 @@ app.get('/searchProduct', (req, res) => {
     })
 }) 
 
-        // testing & exposing server port
+        // testing & exposing server port.
 app.listen(PORT, (req, res) => {
     console.log(`Server on at port ${PORT}`);
 })
