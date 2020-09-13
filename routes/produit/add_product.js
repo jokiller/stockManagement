@@ -19,8 +19,7 @@ router.post('/add', async (req, res) => {
           categorie: categorie,
         });
 
-        product
-          .save()
+        product.save()
           .then((prod) => {
             codebars.map((codebar) => {
               const code = new BarCode({

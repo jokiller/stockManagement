@@ -3,7 +3,7 @@ const express = require('express')
 
 const router = express.Router()
 
-router.put('/modif', (req, res) => {
+router.put('/edit', (req, res) => {
     let updateStock = {}
     if (req.body.id_produit) updateStock.id_produit = req.body.id_produit
     if (req.body.prix_achat) updateStock.prix_achat = req.body.prix_achat
@@ -13,7 +13,11 @@ router.put('/modif', (req, res) => {
     Stock.findById(req.body.id).then((stock) => {
         Stock.update(stock, updateStock).then((newStock) => {
             res.send(newStock)
+        }).catch((e) => {
+            res.send(e)
         })
+    }).catch((e) => {
+        res.send(e)
     })
 
 })
