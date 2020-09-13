@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
         
         // modification products exists
-router.put('/modifier', (req, res) => {
+router.put('/modif', (req, res) => {
     let newProduct = {}
     if (req.body.reference) newProduct.reference = req.body.reference
     if (req.body.type) newProduct.type = req.body.type

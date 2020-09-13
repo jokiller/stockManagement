@@ -5,38 +5,44 @@ const express = require('express')
 const router = express.Router()
 
         // Ading & posting a new product
-router.post('/add', (req, res) => {
-    const reference = req.body.reference
-    const type = req.body.type
-    const categorie = req.body.categorie
-    const codebars = req.body.barcode
+router.post('/add', async (req, res) => {
+    const products = req.body.products;
+    await products.map(_ => {
+        const reference = _.reference;
+        const type = _.type;
+        const categorie = _.categorie;
+        const codebars = _.barcode;
 
-    const product = new Produit({
-      reference: reference,
-      type: type,
-      categorie: categorie,
-    })
+        const product = new Produit({
+          reference: reference,
+          type: type,
+          categorie: categorie,
+        });
 
-    product.save().then((prod) => {
-    codebars.map((codebar) => {
-        const code = new BarCode({
-        barcode: codebar,
-        id_produit: prod.id,
-        });
-        code
-        .save()
-        .then((codeProd) => {
-            console.log(codeProd)
-        })
-        .catch((e) => {
-            console.log(e)
-        });
-    });
-    res.send("insertion successfully <3")
+        product
+          .save()
+          .then((prod) => {
+            codebars.map((codebar) => {
+              const code = new BarCode({
+                barcode: codebar,
+                id_produit: prod.id,
+              });
+              code
+                .save()
+                .then((codeProd) => {
+                  console.log(codeProd);
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
+            });
+            console.log("insertion successfully <3");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
     })
-    .catch((e) => {
-    console.log(e)
-    })
+    res.send('all good mate!')
 })
 
 module.exports = router
